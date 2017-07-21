@@ -11,26 +11,45 @@ public class DHKEBI {
     private static SecureRandom csprng = new SecureRandom();
 
     public static void main(String[] args) {
-    // TODO fill out
+        System.out.println("Enter an option and press Return/Enter:");
+        System.out.println("1) public key\n2) shared secret");
+
+        int answer = stdin.nextInt();
+
+        switch (answer) {
+            case 1: {
+                BigInteger userPublicKey = publicKeyGeneration();
+                System.out.printf("Your public key is:\n%d",
+                        userPublicKey);
+                break;
+            }
+            case 2: {
+                BigInteger userSharedSecret = sharedSecretGeneration();
+                System.out.printf("Your shared secret is:\n%d",
+                        userSharedSecret);
+                break;
+            }
+            default: System.out.print("INVALID_ANS: Please enter 1 or " +
+                    "2"); break;
+        }
     }
 
     // generation methods
-    private static long publicKeyGeneration() {
-        long publicKey, moduloLong, baseLong, secretLong;
-        moduloLong = getModuloLong();
-        baseLong = getBaseLong();
-        secretLong = getSecretLong();
+    private static BigInteger publicKeyGeneration() {
+        BigInteger publicKey, moduloLong, baseLong, secretLong;
+        moduloLong = longToBigInt(getModuloLong());
+        baseLong = longToBigInt(getBaseLong());
+        secretLong = longToBigInt(getSecretLong());
         boolean failOrSuccess = checkFailure(moduloLong, baseLong,
                 secretLong);
         System.out.printf("failOrSuccess: %b\n", failOrSuccess);
         if (failOrSuccess) {
             System.out.println("BAD_LONG: Error getting long");
             System.exit(-1);
-            publicKey = -1;
+            publicKey = BigInteger.valueOf(-1);
             return publicKey;
         } else {
-            publicKey = (long)(pow((float)baseLong, (float)secretLong)) %
-                    moduloLong;
+            publicKey = baseLong.modPow(secretLong, moduloLong);
             return publicKey;
         }
     }
@@ -49,8 +68,8 @@ public class DHKEBI {
             sharedSecret = BigInteger.valueOf(-1);
             return sharedSecret;
         } else {
-            publicKey = publicKey.modPow(secretLong, moduloLong);
-            return publicKey;
+            sharedSecret = publicKey.modPow(secretLong, moduloLong);
+            return sharedSecret;
         }
     }
 
