@@ -75,7 +75,7 @@ public class DHKEBI {
 
     // get methods
     private static byte[] newRandomBytes() {
-        byte[] byteArray = new byte[4];
+        byte[] byteArray = new byte[8];
         csprng.nextBytes(byteArray);
         return byteArray;
     }
@@ -84,7 +84,7 @@ public class DHKEBI {
         for (int i = 0; i < byteArray.length; i++) {
             longForm += ((long) byteArray[i] & 0xffL) << (8 * i);
         }
-        return longForm;
+        return abs(longForm);
     }
     private static long getLong(char ans, String longType) {
         long get;
