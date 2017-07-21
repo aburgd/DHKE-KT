@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 import static java.lang.Math.*;
 
-public class DHKEBI {
+public class DHKEBI_J {
     private static Scanner stdin = new Scanner(System.in);
     private static SecureRandom csprng = new SecureRandom();
 
@@ -151,10 +151,9 @@ public class DHKEBI {
         // put the array into a list
         List<BigInteger> valueList = Arrays.asList(valueArray);
 
-        if (valueList.contains(1) || valueList.contains(-1)) {
-            return true; // failure
-        } else {
-            return false; // not failure
-        }
+        // failure
+        // not failure
+        return valueList.contains(BigInteger.valueOf(1))
+                || valueList.contains(BigInteger.valueOf(-1));
     }
 }

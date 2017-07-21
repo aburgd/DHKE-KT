@@ -1,7 +1,5 @@
-// Only use Random for example purposes!
-// Use security.SecureRandom for production!
-// Actually, this entire thing is for example purposes
-// You've been warned
+// this is retained for historical purposes
+// please look at the DHKEBI_J and DHKE_K files for an updated version
 
 import java.security.SecureRandom;
 import java.util.Scanner;
