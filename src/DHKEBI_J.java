@@ -18,14 +18,22 @@ public class DHKEBI_J {
         switch (answer) {
             case 1: {
                 BigInteger userPublicKey = publicKeyGeneration();
+                byte[] userKeyDigest = DigestTools.getDigest
+                        (userPublicKey, "SHA");
                 System.out.printf("Your public key is:\n%d",
                         userPublicKey);
+                System.out.printf("Your public key's digest is:\n%s",
+                        userKeyDigest);
                 break;
             }
             case 2: {
                 BigInteger userSharedSecret = sharedSecretGeneration();
+                byte[] userSecretDigest = DigestTools.getDigest
+                        (userSharedSecret, "SHA");
                 System.out.printf("Your shared secret is:\n%d",
                         userSharedSecret);
+                System.out.printf("Your shared secret's digest is\n%s",
+                        userSecretDigest);
                 break;
             }
             default: System.out.print("INVALID_ANS: Please enter 1 or " +
