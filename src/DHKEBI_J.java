@@ -1,5 +1,6 @@
 import java.math.BigInteger;
 import java.util.Scanner;
+import org.apache.commons.codec.binary.Hex;
 
 public class DHKEBI_J {
 
@@ -14,23 +15,25 @@ public class DHKEBI_J {
         switch (answer) {
             case 1: {
                 BigInteger userPublicKey = Generation.publicKeyGeneration();
-                String userKeyDigest = DigestTools.getDigest
-                        (userPublicKey, "SHA").toString();
-
-                System.out.printf("Your public key is:\n%d",
+                byte[] userKeyDigest = DigestTools.getDigest
+                        (userPublicKey, "SHA");
+                String userKeyHex = Hex.encodeHexString(userKeyDigest);
+                System.out.printf("Your public key is:\n%d\n",
                         userPublicKey);
                 System.out.print("Your public key's digest is:\n");
-                DigestTools.digestPrinter(userKeyDigest);
+                DigestTools.digestPrinter(userKeyHex);
                 break;
             }
             case 2: {
                 BigInteger userSharedSecret = Generation.sharedSecretGeneration();
-                String userSecretDigest = DigestTools.getDigest
-                        (userSharedSecret, "SHA").toString();
-                System.out.printf("Your shared secret is:\n%d",
+                byte[] userSecretDigest = DigestTools.getDigest
+                        (userSharedSecret, "SHA");
+                String userSecretHex = Hex.encodeHexString
+                        (userSecretDigest);
+                System.out.printf("Your shared secret is:\n%d\n",
                         userSharedSecret);
                 System.out.print("Your shared secret's digest is:\n");
-                DigestTools.digestPrinter(userSecretDigest);
+                DigestTools.digestPrinter(userSecretHex);
                 break;
             }
             default: System.out.print("INVALID_ANS: Please enter 1 or " +
