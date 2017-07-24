@@ -3,14 +3,14 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class DigestTools {
+class DigestTools {
     static byte[] getDigest(BigInteger bigIntValue, String...
             instanceAlgo) {
-        if (instanceAlgo[1].isEmpty()) instanceAlgo[1] = "SHA-256";
+        if (instanceAlgo[0].isEmpty()) instanceAlgo[0] = "SHA-256";
         String biString = bigIntValue.toString();
         MessageDigest digest = null;
         try {
-            digest = MessageDigest.getInstance(instanceAlgo[1]);
+            digest = MessageDigest.getInstance(instanceAlgo[0]);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
@@ -18,7 +18,7 @@ public class DigestTools {
                 .UTF_8));
     }
 
-    public static void digestPrinter(String digestHex) {
+    static void digestPrinter(String digestHex) {
         // left padding for odd-length strings
         if (digestHex.length() % 2 != 0) digestHex = " " + digestHex;
         for (int i = 0; i < digestHex.length(); i += 2) {
