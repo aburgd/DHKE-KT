@@ -4,7 +4,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class DigestTools {
-    public static byte[] getDigest(BigInteger bigIntValue, String...
+    static byte[] getDigest(BigInteger bigIntValue, String...
             instanceAlgo) {
         if (instanceAlgo[1].isEmpty()) instanceAlgo[1] = "SHA-256";
         String biString = bigIntValue.toString();
