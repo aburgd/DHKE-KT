@@ -2,7 +2,7 @@ import java.math.BigInteger;
 import java.util.Scanner;
 import org.apache.commons.codec.binary.Hex;
 
-public class DHKEBI_J {
+public class DHKEBI {
 
     private static Scanner stdin = new Scanner(System.in);
 
